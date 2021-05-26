@@ -25,6 +25,18 @@ app.get('/api/people', (req, res) => {
   //gauname objektu masyvo json formatu adresa narsykleje
   res.json(people);
 });
+//get one person
+//cia :id bus sukurtas parametras, kuri galesime naudoti funkcijos viduje , o paramId bus tas id kuri paduosime adrese localhost:3000/api/people/it55   Siuo atveju paramId = it55
+app.get('/api/people/:id', (req, res) => {
+  const paramId = req.params.id;
+  const found = people.find((person) => person.id === paramId);
+  // res.send(`id you are looking for is: ${paramId}`);
+
+  if (!found) {
+    res.status(404).json({ errorMsg: `You have entered invalid id!Try again!` });
+  }
+  res.json(found);
+});
 
 //kai turim papke , kurios failus norim pasiekti is narsykles pagal pav
 //Nustatom static folderi , su app.use . Tai narsykleje /about.html irasius nueis i about puslapi , o irasius tik / nueis i index.html
