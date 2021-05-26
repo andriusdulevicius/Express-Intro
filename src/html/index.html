@@ -9,5 +9,16 @@
   <body>
     <h1>Express is on</h1>
     <a href="/about">About</a>
+    <button id="get-ppl">Get People</button>
+
+    <script>
+      const btn = document.getElementById('get-ppl');
+      btn.addEventListener('click', () => {
+        fetch('http://localhost:3000/api/people')
+          .then((response) => response.json())
+          .then((data) => console.log(data))
+          .catch((err) => console.error(err));
+      });
+    </script>
   </body>
 </html>

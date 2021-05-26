@@ -17,7 +17,7 @@ const aboutPath = path.join(__dirname, 'html', 'about.html');
 // console.log(indexPath);
 
 //Routes
-// app.get('/', (req, res) => res.sendFile(indexPath));
+app.get('/', (req, res) => res.sendFile(indexPath));
 // app.get('/about', (req, res) => res.sendFile(aboutPath));
 
 //our API
