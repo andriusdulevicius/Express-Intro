@@ -1,0 +1,29 @@
+{
+  "name": "expressintro",
+  "version": "1.0.0",
+  "description": "We start making backend",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/andriusdulevicius/Express-Intro.git"
+  },
+  "keywords": [
+    "express",
+    "node"
+  ],
+  "author": "AD",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/andriusdulevicius/Express-Intro/issues"
+  },
+  "homepage": "https://github.com/andriusdulevicius/Express-Intro#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.7"
+  }
+}
