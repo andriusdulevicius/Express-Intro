@@ -9,9 +9,9 @@ const { people } = require('./js/people');
 console.log(people);
 
 //current paths
-const htmlPath = path.join(__dirname, 'html');
-const indexPath = path.join(__dirname, 'html', 'index.html');
-const aboutPath = path.join(__dirname, 'html', 'about.html');
+const htmlPath = path.join(__dirname, '../client', 'html');
+const indexPath = path.join(__dirname, '../client', 'html', 'index.html');
+const aboutPath = path.join(__dirname, '../client', 'html', 'about.html');
 //resolve rasome kai viena paduodame __dirname , o join naudojame kai reikia paduoti daugiau kelia nurodanciu elementu
 
 // console.log(indexPath);

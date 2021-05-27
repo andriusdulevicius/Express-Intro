@@ -1,0 +1,139 @@
+express banckendo serveris, runinantis node.
+nera prisirises prie frameworko, galim lengvai ir placiai naudot, yra lightweight. Vietoj nodejs, naudoja projektuose express'a.
+
+create index.js in src.
+
+nomjs.com > search express.
+norint pradet, reik pacion npm'o:
+npm init
+npm install express
+tada atsiranda package.json ir mode_modules
+gitignore node_modules
+reikia nodemon'o: https://www.npmjs.com/package/nodemon
+npm install nodemon --save-dev
+
+pasisetupinam express serveri:
+//isitraukiam express is npm
+const express = require('express');
+//skuriam express app objekta
+const app = express();
+
+app.listen(3000);
+PALEIDZIAM SERVA: node src/index.js
+(einam i browser> localhost:3000, ir rasys cannot get)
+prie app.listen(3000) dedam antra argumenta fn su arrow, tai iseina: 
+app.listen(3000, () => console.log('server is running'));
+ctrl + c sustabdom serveri, ir vel run.
+nieko. 
+tada
+//main route
+app.get('/', (req, res) => {
+  res.send('<h1>Hello pacan backender from express</h1>');
+});
+stop serve.
+terminale vel start server bet tik su nodemon: 
+nodemon src/index.js
+(nodemon-parodys live pakitimus terminale!)
+
+hotkeys: package.json>scripts :
+"start": "nodemon src/index.js"
+
+uzsikomentuot:
+res.send('<h1>Hello pacan backender from express</h1>');
+uzsirasyt vietoj to:  res.sendFile();
+
+virsuj uzsirasyt:
+const path = require('path');
+
+susikuriam html papke ir joje index.html
+
+po app=express(); rasom:
+const indexPath = path.join(__dirname, 'html', 'index.html');
+console.log('indexPath', indexPath);
+
+prie res.sendFile() viduj irasom:
+indexPath, tai  res.sendFile(indexPath);
+
+html papkej create about.html
+
+po const indexPath susikuriam same: 
+const aboutPath = path.join(__dirname, 'html', 'about.html');
+
+po app.get funkcijos rasom po ja:
+app.get('/about', (req, res) => res.sendFile(aboutPath));
+
+abiejuose html home ir about pasirasom po h1: 
+<a href="/about">About</a> arba
+<a href="/">Home</a>
+
+tada browseryje prie localhost prisirasom /about. vuala.
+
+
+kai turim papke kurios failus norim pasiekti is narsykles pagal pavadinimus,nustatom static papke.
+prie current paths prisirasom: 
+const htmlPath = path.join(__dirname, 'html');
+isirasom :  app.use(express.static(htmlPath));
+
+uzsikomentuojam: 
+app.get('/', (req, res) => {
+//   //   res.send('<h1>Hello pacan backender from express</h1>');
+//   res.sendFile(indexPath);
+// });
+// app.get('/about', (req, res) => res.sendFile(aboutPath));
+
+ir browseryje veiks linkas i home, bet i about ne, todel reikia browseryje pries localhost:3000/about.html
+
+create new folder in src > js > people.js
+pridedam people objekta, apacioj prirasom: module.exports = {
+  people,};
+
+index.js isidedam virsuj po path:
+const { people } = require('./js/people');
+pabandymui console.log(people); ir matosi TERMINALE PEOPLE OBJ
+
+kazkur apacioj isirasom: 
+// OUR API
+app.get('/api/people', (req, res) => {
+  res.json(people);
+});
+ir gausim js objekta html'e, tiesiog irasom i brwoseri:
+http://localhost:3000/api/people
+
+index.html isirasom po a:
+<button id="ppl">Get people</button>
+
+    <script>
+        document.getElementById("ppl").addEventListener("click", () => {
+            console.log("click");
+            fetch("http://localhost:3000/api/people")
+            .then((resp)=> resp.json())
+            .then((data) => console.log('data',data))
+            .catch((err) => console.error(err.message))
+        })
+    </script>
+
+
+kad gauti one person prisirasom zemiau:
+//get one person
+app.get('/api/person/:id', (req, res) => {
+  const paramId = req.params.id;
+  const found = people.find((person) => person.id === paramId);
+
+  if (!found) {
+    res
+      .status(404)
+      .json({ errorMsg: `sorry, person with id ${paramId} was not found` });
+  }
+  //paziurim parametra
+  //   res.send(`id you are looking for ${paramId}`);
+  res.json(found);
+});
+
+browseryje irasom: localhost:3000/person/it53 (pvz cia jo id)
+
+
+
+
+
+=====================
+<npm list -g> pasiziureti savo npm lista, kuriuos susiinstaliavot globaliai ir jei ka issitrinti nereikalingus, kuriuos susiimstaliavot per klaida
