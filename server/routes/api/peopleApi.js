@@ -29,7 +29,7 @@ router.get('/:id', (req, res) => {
 //gauti duomenys is vartotojo formas arba json pavidalu ir sukuri nauja vartotoja tarp savo peopleData
 
 router.post('/', (req, res) => {
-  console.log('This was send to server in body: ', req.body);
+  console.log('This was send to server in body: ');
   //prideti nauja person objekta i people arr
   const newPerson = {
     id: (++personId).toString(),
@@ -51,9 +51,10 @@ router.put('/:id', (req, res) => {
   if (!found) {
     res.status(404).json({ errorMsg: `You have entered invalid id!Try again!` });
   }
+  const { name, surname } = req.body;
   //atnaujinti zmogaus duomenis
-  found.name = req.body.name;
-  found.surname = req.body.surname;
+  found.name = name || found.name;
+  found.surname = surname || found.surname; //jei turim paeditinta pavarde ja naudojam , jei neturim , naudojam tai kas buvo
   res.json({ msg: 'user was updated', updatedUser: found });
 });
 
