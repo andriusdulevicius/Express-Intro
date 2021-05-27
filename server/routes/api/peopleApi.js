@@ -1,6 +1,7 @@
 const express = require('express');
 const people = require('../../js/peopleData');
 const router = express.Router();
+let personId = 6;
 //express.Router() - pagalbinis metodas, padedantis sureguliuoti kelius tarp failu.
 
 //our API -application programming interface
@@ -28,8 +29,15 @@ router.get('/:id', (req, res) => {
 //gauti duomenys is vartotojo formas arba json pavidalu ir sukuri nauja vartotoja tarp savo peopleData
 
 router.post('/', (req, res) => {
-  console.log(req.body);
-  res.send(req.body);
+  console.log('This was send to server in body: ', req.body);
+  //prideti nauja person objekta i people arr
+  const newPerson = {
+    id: (++personId).toString(),
+    name: req.body.name,
+    surname: req.body.surname,
+  };
+  people.push(newPerson);
+  res.json(people);
 });
 
 module.exports = router;
