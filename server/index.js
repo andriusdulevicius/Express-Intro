@@ -20,6 +20,12 @@ const logger = (req, res, next) => {
 
 app.use(logger);
 
+// json duomenu atkodavimas/istraukimas is HTTP Post requesto
+app.use(express.json());
+//kad galetume dirbti su formos duomenimis body dalyje
+app.use(express.urlencoded({ extended: false }));
+//tas dvi eilutes rasome , kad gautum atgal i body normalius duomenis o ne undefined
+
 //current paths
 // eslint-disable-next-line no-undef
 const htmlPath = path.join(__dirname, '../client', 'html');
