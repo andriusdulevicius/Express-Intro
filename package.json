@@ -4,7 +4,8 @@
   "description": "We start making backend",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon server/index.js"
+    "start": "nodemon server/index.js",
+    "lint:srv": "./node_modules/.bin/eslint server"
   },
   "repository": {
     "type": "git",
