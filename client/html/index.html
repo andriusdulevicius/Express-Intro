@@ -27,8 +27,8 @@
       sendBtn.addEventListener('click', () => {
         console.log('sending post data');
 
-        fetch('/api/people', {
-          method: 'POST',
+        fetch('/api/people/1', {
+          method: 'PUT',
           body: JSON.stringify({
             name: 'James',
             surname: 'Jameson',

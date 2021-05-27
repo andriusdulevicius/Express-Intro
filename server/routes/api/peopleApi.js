@@ -40,4 +40,21 @@ router.post('/', (req, res) => {
   res.json(people);
 });
 
+//edit  one person Endpoint
+//put requestas padeda rasti 1 person ir paeditinti
+router.put('/:id', (req, res) => {
+  console.log('vykdomas put requestas');
+
+  const paramId = req.params.id;
+  const found = people.find((person) => person.id === paramId);
+
+  if (!found) {
+    res.status(404).json({ errorMsg: `You have entered invalid id!Try again!` });
+  }
+  //atnaujinti zmogaus duomenis
+  found.name = req.body.name;
+  found.surname = req.body.surname;
+  res.json({ msg: 'user was updated', updatedUser: found });
+});
+
 module.exports = router;
