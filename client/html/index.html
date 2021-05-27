@@ -25,20 +25,16 @@
       //send post data fetch json
       const sendBtn = document.getElementById('send-data');
       sendBtn.addEventListener('click', () => {
-        console.log('sending post data');
+        console.log('deleting post data');
 
-        fetch('/api/people/1', {
-          method: 'PUT',
-          body: JSON.stringify({
-            name: 'James',
-            surname: 'Jameson',
-          }),
+        fetch('/api/people/2', {
+          method: 'DELETE',
           headers: {
             'Content-type': 'application/json; charset=UTF-8',
           },
         })
           .then((response) => response.json())
-          .then((data) => console.log('post request', data))
+          .then((data) => console.log('delete request', data))
           .catch((err) => console.error(err));
       });
     </script>

@@ -1,4 +1,4 @@
-let people = [
+const people = [
   {
     id: '1',
     name: 'Jonas',

@@ -1,5 +1,5 @@
 const express = require('express');
-const people = require('../../js/peopleData');
+let people = require('../../js/peopleData');
 const router = express.Router();
 let personId = 6;
 //express.Router() - pagalbinis metodas, padedantis sureguliuoti kelius tarp failu.
@@ -56,6 +56,23 @@ router.put('/:id', (req, res) => {
   found.name = name || found.name;
   found.surname = surname || found.surname; //jei turim paeditinta pavarde ja naudojam , jei neturim , naudojam tai kas buvo
   res.json({ msg: 'user was updated', updatedUser: found });
+});
+
+//delete router (delete one person EndPoint)
+
+router.delete('/:id', (req, res) => {
+  const paramId = req.params.id;
+  //randam ka norim istrinti pagal id
+  const found = people.find((person) => person.id === paramId);
+  // res.send(`id you are looking for is: ${paramId}`);
+
+  if (!found) {
+    res.status(404).json({ errorMsg: `You have entered invalid id!Try again!` });
+  }
+  //isfiltruojam visus objektus masyve, isskyrus ta kuri radom ir norim istrinti.
+  people = people.filter((p) => p !== found);
+
+  res.json({ msg: 'delete successful', deletedPerson: found, peopleLeftAfterDelete: people });
 });
 
 module.exports = router;
